@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lola Simonneau Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one plain light page in Lola's brand colours. Illustrated hero with achievement bubbles, a 3-step "how I work" strip, then compact case studies where a visual carries each story. Single light look by design: the illustrations are drawn for a light ground. */
+:root{
+  color-scheme:light;
+  --bg:#FFFDF8; --card:#FFFFFF; --ink:#241B22; --muted:#6A5E66; --faint:#9A8E96; --line:#EDE4E6;
+  --yellow:#FFDE59; --pink:#F0BED4; --pink-soft:#FBEAF1; --yellow-soft:#FFF6CC;
+  --accent:#A8365F;            /* deep pink for small text and links */
+  --c-before:#C99A00; --c-after:#C4577F;
+  --display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --body:"Figtree","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --wrap:1120px;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;margin:0}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.06;text-wrap:balance;margin:0;letter-spacing:-.015em}
+p{margin:0}
+a{color:var(--accent);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.illus{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+
+/* header */
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:16px;flex-wrap:wrap}
+.mark{font-family:var(--display);font-weight:800;font-size:20px;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px}
+.mark i{width:14px;height:14px;border-radius:50%;background:var(--yellow);box-shadow:6px 0 0 var(--pink);display:inline-block;margin-right:6px}
+nav{display:flex;gap:24px;flex-wrap:wrap}
+nav a{font-family:var(--display);font-weight:500;font-size:15px;color:var(--ink);text-decoration:none}
+nav a:hover{color:var(--accent)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,4vw,56px);align-items:center;padding-block:clamp(24px,5vw,56px) clamp(40px,6vw,80px)}
+.hero-text{display:grid;gap:22px;min-width:0}
+.hero h1{font-size:clamp(42px,5.6vw,70px);font-weight:800}
+.hero h1 span{background:linear-gradient(transparent 62%,var(--yellow) 62%,var(--yellow) 92%,transparent 92%)}
+.hero .lede{font-size:clamp(18px,1.8vw,20px);color:var(--muted);max-width:40ch}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.btn{font-family:var(--display);font-weight:700;font-size:15px;padding:12px 20px;border-radius:999px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;text-decoration:none;min-height:46px;display:inline-flex;align-items:center}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn:hover{background:var(--pink);color:var(--ink)}
+
+/* stage: a cluster of bubbles floats above the desk, overlapping its top edge. Sized in container units so it scales as one piece. */
+.stage{position:relative;min-width:0;container-type:inline-size}
+.bubbles{position:relative;width:100%;aspect-ratio:100/42}
+.stage img{width:100%;height:auto;display:block;margin-top:-15cqw;position:relative;z-index:0}
+.bubble{position:absolute;z-index:1;aspect-ratio:1;border-radius:50%;display:grid;place-content:center;text-align:center;padding:6%;
+  box-shadow:0 10px 24px rgba(36,27,34,.12);border:2px solid var(--ink)}
+.bubble b{font-family:var(--display);font-weight:800;line-height:.95;font-variant-numeric:tabular-nums;font-size:6cqw}
+.bubble span{font-size:clamp(11px,1.9cqw,14px);line-height:1.2;font-weight:600;max-width:11ch;margin:4px auto 0}
+.b1{width:30cqw;left:2%;top:4%;background:var(--yellow)}
+.b1 b{font-size:9cqw}
+.b2{width:22cqw;left:33%;top:28%;background:var(--pink)}
+.b3{width:21cqw;left:56%;top:0;background:var(--yellow)}
+.b4{width:24cqw;left:75%;top:30%;background:var(--pink)}
+@media (prefers-reduced-motion:no-preference){
+  .bubble{animation:float 5s ease-in-out infinite}
+  .b2{animation-delay:-1.2s}.b3{animation-delay:-2.4s}.b4{animation-delay:-3.6s}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+}
+@media (max-width:820px){.hero{grid-template-columns:1fr}}
+@media (max-width:600px){
+  .bubbles{aspect-ratio:100/70}
+  .stage img{margin-top:-10cqw}
+  .bubble b{font-size:9cqw}
+  .bubble span{font-size:clamp(11px,3.3cqw,13px)}
+  .b1{width:40cqw;left:0;top:2%}
+  .b1 b{font-size:13cqw}
+  .b2{width:31cqw;left:41%;top:0}
+  .b3{width:30cqw;left:69%;top:38%}
+  .b4{width:33cqw;left:30%;top:50%}
+}
+
+/* sections */
+section.block{padding-block:clamp(56px,8vw,96px)}
+.sec-head{display:grid;gap:10px;margin-bottom:36px;justify-items:start}
+.sec-head h2{font-size:clamp(32px,4.4vw,50px);font-weight:800}
+
+/* how I work */
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,3vw,32px)}
+.step{display:grid;gap:12px;align-content:start;text-align:center;justify-items:center}
+.step .art{width:min(100%,260px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;overflow:hidden}
+.step:nth-child(1) .art{background:var(--pink-soft)}
+.step:nth-child(2) .art{background:var(--yellow-soft)}
+.step:nth-child(3) .art{background:var(--pink-soft)}
+.step .art img{width:96%;height:auto;margin-top:8%}
+.step .n{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.08em}
+.step h3{font-size:24px;font-weight:800}
+.step p{color:var(--muted);max-width:30ch;font-size:16px}
+@media (max-width:760px){.how{grid-template-columns:1fr;gap:40px}}
+
+/* case studies */
+.case{display:grid;gap:22px;padding-block:44px;border-top:2px solid var(--ink)}
+.case:first-of-type{border-top:0;padding-top:0}
+.case-top{display:grid;gap:14px}
+.case-top > div:first-child{display:grid;gap:10px;min-width:0;max-width:62ch}
+.tagline{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.no{font-family:var(--display);font-weight:800;font-size:14px;background:var(--yellow);border-radius:999px;padding:3px 12px}
+.case h3{font-size:clamp(28px,3.6vw,40px);font-weight:800}
+.case .sum{color:var(--muted);font-size:18px}
+.meta{display:flex;gap:8px;flex-wrap:wrap}
+.meta span{font-size:13.5px;padding:6px 12px;border-radius:999px;background:var(--pink-soft)}
+
+.visual{background:var(--card);border:1.5px solid var(--line);border-radius:18px;padding:clamp(18px,3vw,28px);display:grid;gap:18px;min-width:0}
+.visual-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.visual-head h4{font-size:18px;font-weight:700}
+
+.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.r{padding:16px 18px;border-radius:14px;background:var(--pink-soft);display:grid;gap:4px;align-content:start}
+.r:nth-child(even){background:var(--yellow-soft)}
+.r b{font-family:var(--display);font-weight:800;font-size:28px;line-height:1.05;font-variant-numeric:tabular-nums}
+.r span{font-size:14px;line-height:1.35;color:var(--muted)}
+
+/* reel steps */
+.reel{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.reel span{font-family:var(--display);font-weight:700;font-size:16px;padding:10px 18px;border-radius:999px;border:2px solid var(--ink);background:var(--card)}
+.reel span:nth-of-type(odd){background:var(--yellow)}
+.reel span:nth-of-type(even){background:var(--pink)}
+.reel i{font-style:normal;font-weight:700;color:var(--ink)}
+
+/* scorecard */
+.toggle{display:inline-flex;border:2px solid var(--ink);border-radius:999px;padding:3px;gap:3px;flex-wrap:wrap;justify-self:start}
+.toggle button{font-family:var(--display);font-weight:700;font-size:14px;border:0;background:transparent;color:var(--ink);padding:8px 16px;border-radius:999px;cursor:pointer;min-height:40px}
+.toggle button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.tbl-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:560px}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);text-align:left;font-weight:500;padding:8px 10px;border-bottom:2px solid var(--ink)}
+td{padding:11px 10px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+td.num,th.num{text-align:right}
+tr.out td{color:var(--faint)}
+tr.out td:nth-child(2){text-decoration:line-through}
+.rank{font-family:var(--display);font-weight:800;width:36px}
+.bar{display:inline-block;height:10px;border-radius:5px;background:var(--pink);border:1.5px solid var(--ink);vertical-align:middle;margin-right:8px}
+.pill{font-family:var(--mono);font-size:11px;padding:3px 9px;border-radius:999px;background:var(--yellow-soft);white-space:nowrap}
+.pill.no{background:var(--ink);color:var(--bg)}
+.verdict{font-size:16px;color:var(--muted);max-width:62ch}
+.verdict strong{color:var(--ink)}
+
+/* funnel */
+.funnel{display:grid;gap:8px}
+.fstep{display:grid;grid-template-columns:minmax(0,130px) minmax(0,1fr);gap:14px;align-items:center}
+.fstep span{font-family:var(--display);font-weight:700;font-size:15px}
+.fbar{height:30px;border-radius:8px;border:1.5px solid var(--ink)}
+.fstep:nth-child(1) .fbar{width:100%;background:var(--yellow-soft)}
+.fstep:nth-child(2) .fbar{width:72%;background:var(--yellow)}
+.fstep:nth-child(3) .fbar{width:46%;background:var(--pink)}
+.fstep:nth-child(4) .fbar{width:26%;background:var(--c-after)}
+.cap2{font-size:14.5px;color:var(--muted)}
+
+/* dumbbell */
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.legend i{width:12px;height:12px;border-radius:50%;display:inline-block;vertical-align:-1px;margin-right:6px}
+.dumb{display:grid;gap:12px}
+.drow{display:grid;gap:6px;border-radius:8px;padding:6px 8px;margin-inline:-8px}
+.drow:hover,.drow:focus-visible{background:var(--yellow-soft)}
+.dline{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.dline b{font-family:var(--display);font-size:16px}
+.dline span{font-size:14.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.dline span em{font-style:normal;color:var(--ink);font-weight:600}
+.track{position:relative;height:18px}
+.track .grid{position:absolute;top:0;bottom:0;width:1px;background:var(--line)}
+.track .seg{position:absolute;top:8px;height:2px;background:var(--faint)}
+.track .dot{position:absolute;top:3px;width:12px;height:12px;border-radius:50%;transform:translateX(-50%);box-shadow:0 0 0 2px var(--card)}
+.axis{position:relative;height:18px;font-family:var(--mono);font-size:11px;color:var(--faint)}
+.axis span{position:absolute;transform:translateX(-50%)}
+.axis span:first-child{transform:none}
+details.tv summary{cursor:pointer;font-family:var(--display);font-weight:700;font-size:14px;color:var(--accent)}
+details.tv table{margin-top:10px}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font-size:13px;line-height:1.4;padding:8px 10px;border-radius:8px;z-index:20;max-width:220px;font-family:var(--display)}
+
+/* newsletter */
+.nl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.mock{border:1.5px solid var(--line);border-radius:12px;background:var(--bg);padding:16px;display:grid;gap:8px;align-content:start}
+.mock .ln{height:7px;border-radius:4px;background:var(--line)}
+.mock .hd{height:14px;width:70%;border-radius:4px;background:var(--ink)}
+.mock .img{aspect-ratio:16/7;border-radius:8px;background:var(--pink)}
+.mock .cta{justify-self:start;height:28px;width:120px;border-radius:999px;background:var(--ink)}
+.mock .card{display:grid;grid-template-columns:44px minmax(0,1fr);gap:10px;align-items:center}
+.mock .card i{aspect-ratio:1;border-radius:8px;background:var(--yellow)}
+@media (max-width:640px){.nl{grid-template-columns:1fr}}
+
+/* about + contact */
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:start}
+.about .prose{display:grid;gap:16px;font-size:19px;max-width:46ch}
+.timeline{list-style:none;margin:0;padding:0;display:grid;border-top:2px solid var(--ink)}
+.timeline li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 16px;padding-block:12px;border-bottom:1px solid var(--line)}
+.timeline b{font-family:var(--display);font-weight:700;font-size:16px}
+.timeline span{font-size:14.5px;color:var(--muted)}
+.timeline time{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap;grid-row:1;grid-column:2}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{font-size:14px;padding:6px 12px;border-radius:999px;background:var(--yellow-soft)}
+.chips span:nth-child(3n+2){background:var(--pink-soft)}
+@media (max-width:820px){.about{grid-template-columns:1fr}}
+
+.contact{margin-block:24px 40px;padding:clamp(28px,5vw,56px);border-radius:28px;background:var(--yellow);display:grid;gap:20px;justify-items:start}
+.contact h2{font-size:clamp(34px,5vw,56px);font-weight:800;max-width:16ch}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.email{font-family:var(--mono);font-size:16px;padding:12px 16px;background:var(--card);border-radius:999px;border:2px solid var(--ink);user-select:all;overflow-wrap:anywhere}
+.contact .btn:hover{background:var(--pink)}
+.note{font-size:14px;color:var(--ink);max-width:70ch;opacity:.8}
+footer{padding-block:0 40px;font-size:14px;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){a,.btn,.toggle button{transition:background-color .15s,color .15s}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="#top"><i aria-hidden="true"></i>Lola Simonneau</a>
+    <nav aria-label="Main">
+      <a href="#how">How I work</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-text">
+        <span class="label">Brand marketer · Toronto · EN / FR</span>
+        <h1>Brands people <span>choose to follow.</span></h1>
+        <p class="lede">I turn audience insight into creative people share, then measure what actually worked.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#work">See my work</a>
+          <a class="btn" href="#contact">Get in touch</a>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="bubbles" role="list" aria-label="Key results">
+          <div class="bubble b1" role="listitem"><b>3M</b><span>views on one reel</span></div>
+          <div class="bubble b2" role="listitem"><b>2×</b><span>social audience</span></div>
+          <div class="bubble b3" role="listitem"><b>34</b><span>creator partners</span></div>
+          <div class="bubble b4" role="listitem"><b>~50%</b><span>email open rate</span></div>
+        </div>
+        <img src="img/desk.webp" width="1200" height="800" alt="Illustration of Lola at her desk, working on a content calendar and a results dashboard">
+      </div>
+    </section>
+  </div>
+
+  <section class="block" id="how">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">How I work</span>
+        <h2>Three steps, every campaign</h2>
+      </div>
+      <div class="how">
+        <div class="step">
+          <div class="art"><img src="img/listen.webp" width="700" height="700" alt="Lola looking through a magnifying glass"></div>
+          <span class="n">01</span>
+          <h3>Find the insight</h3>
+          <p>Start with the audience: what they trust, watch and share.</p>
+        </div>
+        <div class="step">
+          <div class="art"><img src="img/idea.webp" width="700" height="700" alt="Lola with a lightbulb idea"></div>
+          <span class="n">02</span>
+          <h3>Shape it and make it</h3>
+          <p>One clear idea, then the briefs, partners, filming and editing.</p>
+        </div>
+        <div class="step">
+          <div class="art"><img src="img/measure.webp" width="700" height="700" alt="Lola thinking, surrounded by charts"></div>
+          <span class="n">03</span>
+          <h3>Measure honestly</h3>
+          <p>Tracking before launch, a dashboard after, and a second look before celebrating.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">Selected work</span>
+        <h2>Case studies</h2>
+      </div>
+
+      <article class="case">
+        <div class="case-top">
+          <div>
+            <div class="tagline"><span class="no">01</span><span class="label">Creator marketing</span></div>
+            <h3>Building a creator from scratch</h3>
+            <p class="sum">Busy vets ignore software ads, so we built a vet they'd want to follow.</p>
+          </div>
+          <div class="meta"><span>14 months</span><span>3–5 reels a week</span><span>Concept to edit</span></div>
+        </div>
+        <div class="visual">
+          <div class="visual-head"><h4>How every reel was built</h4></div>
+          <div class="reel"><span>The hook</span><i>→</i><span>Recognition</span><i>→</i><span>The twist</span><i>→</i><span>The share</span></div>
+        </div>
+        <div class="results">
+          <div class="r"><b>0 → 5.8K</b><span>followers in 14 months</span></div>
+          <div class="r"><b>3M</b><span>views on the top reel</span></div>
+          <div class="r"><b>1.1%</b><span>share rate on a 417K-view reel</span></div>
+          <div class="r"><b>Inbound</b><span>demo requests from viewers</span></div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-top">
+          <div>
+            <div class="tagline"><span class="no">02</span><span class="label">Influencer program</span></div>
+            <h3>Choosing creators with data, not follower counts</h3>
+            <p class="sum">Big audiences don't always mean real interest, so every creator had to earn their place.</p>
+          </div>
+          <div class="meta"><span>34 creators</span><span>2 campaigns</span><span>1 talent agency</span></div>
+        </div>
+        <div class="visual">
+          <div class="visual-head"><h4>Same five creators, two ways to rank them</h4><span class="illus">Sample creators · not real data</span></div>
+          <div class="toggle" role="group" aria-label="Rank creators by">
+            <button type="button" id="by-followers" aria-pressed="false">By followers</button>
+            <button type="button" id="by-score" aria-pressed="true">By my scorecard</button>
+          </div>
+          <div class="tbl-wrap">
+            <table aria-describedby="verdict">
+              <thead><tr><th>#</th><th>Creator</th><th class="num">Followers</th><th class="num">Engagement</th><th class="num">Content fit</th><th>Competitor?</th><th>Score</th></tr></thead>
+              <tbody id="sc-body"></tbody>
+            </table>
+          </div>
+          <p class="verdict" id="verdict"></p>
+        </div>
+        <div class="visual">
+          <div class="visual-head"><h4>Tracked per creator, from view to sign-up</h4><span class="illus">Diagram · not to scale</span></div>
+          <div class="funnel">
+            <div class="fstep"><span>Views</span><div class="fbar"></div></div>
+            <div class="fstep"><span>Site visits</span><div class="fbar"></div></div>
+            <div class="fstep"><span>Sign-up page</span><div class="fbar"></div></div>
+            <div class="fstep"><span>Sign-ups</span><div class="fbar"></div></div>
+          </div>
+          <p class="cap2">One tracking link per creator, joined in a Looker and GA4 dashboard.</p>
+        </div>
+        <div class="results">
+          <div class="r"><b>34</b><span>creators across two campaigns</span></div>
+          <div class="r"><b>82K+</b><span>views from 20 reels in campaign one</span></div>
+          <div class="r"><b>Per creator</b><span>results, not just total reach</span></div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-top">
+          <div>
+            <div class="tagline"><span class="no">03</span><span class="label">Brand social</span></div>
+            <h3>Doubling a B2B brand's audience</h3>
+            <p class="sum">Two content pillars: help a clinic, or make it laugh.</p>
+          </div>
+          <div class="meta"><span>15 months</span><span>5 platforms</span></div>
+        </div>
+        <div class="visual">
+          <div class="visual-head"><h4>Followers by platform</h4><span class="illus">Public follower counts</span></div>
+          <div class="legend" aria-hidden="true"><span><i style="background:var(--c-before)"></i>June 2025</span><span><i style="background:var(--c-after)"></i>Sept 2026</span></div>
+          <div class="dumb" id="dumb"></div>
+          <div class="axis" aria-hidden="true"><span style="left:0">0</span><span style="left:28.57%">1K</span><span style="left:57.14%">2K</span><span style="left:85.71%">3K</span></div>
+          <details class="tv"><summary>View as table</summary>
+            <div class="tbl-wrap"><table><thead><tr><th>Platform</th><th class="num">June 2025</th><th class="num">Sept 2026</th><th class="num">Change</th></tr></thead><tbody id="dumb-table"></tbody></table></div>
+          </details>
+        </div>
+        <div class="results">
+          <div class="r"><b>+96%</b><span>total followers, 3.2K to 6.3K</span></div>
+          <div class="r"><b>+173%</b><span>Instagram</span></div>
+          <div class="r"><b>24K+</b><span>views on one boosted testimonial</span></div>
+        </div>
+      </article>
+
+      <article class="case">
+        <div class="case-top">
+          <div>
+            <div class="tagline"><span class="no">04</span><span class="label">Email</span></div>
+            <h3>A newsletter people actually open</h3>
+            <p class="sum">Shorter, more human copy, and one clear action per section.</p>
+          </div>
+          <div class="meta"><span>8.2K readers</span><span>13 monthly sends</span></div>
+        </div>
+        <div class="visual">
+          <div class="visual-head"><h4>The redesign</h4><span class="illus">Wireframe illustration</span></div>
+          <div class="nl">
+            <div style="display:grid;gap:8px">
+              <div class="mock" aria-hidden="true"><div class="hd"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln" style="width:85%"></div><div class="ln"></div><div class="ln"></div><div class="ln" style="width:60%"></div><div class="ln"></div><div class="ln" style="width:75%"></div></div>
+              <p class="cap2"><strong>Before:</strong> long text, one link at the bottom.</p>
+            </div>
+            <div style="display:grid;gap:8px">
+              <div class="mock" aria-hidden="true"><div class="hd"></div><div class="img"></div><div class="ln" style="width:90%"></div><div class="cta"></div><div class="card"><i></i><div style="display:grid;gap:6px"><div class="ln"></div><div class="ln" style="width:70%"></div></div></div><div class="card"><i></i><div style="display:grid;gap:6px"><div class="ln"></div><div class="ln" style="width:55%"></div></div></div></div>
+              <p class="cap2"><strong>After:</strong> visual, scannable, one clear action.</p>
+            </div>
+          </div>
+        </div>
+        <div class="results">
+          <div class="r"><b>8.2K</b><span>readers per send</span></div>
+          <div class="r"><b>~50%</b><span>average open rate</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="block" id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="label">About</span>
+        <h2>From the grocery aisle to brand strategy</h2>
+      </div>
+      <div class="about">
+        <div class="prose">
+          <p>I grew up in Nice, France, and now live in Toronto. I think in two languages and write in both.</p>
+          <p>Stocking shelves at a natural food market taught me how people choose what to buy. I still start every brief there.</p>
+          <div class="chips"><span>Creator programs</span><span>Brand social</span><span>Email &amp; CRM</span><span>Looker</span><span>GA4</span><span>Search Console</span><span>Filming &amp; editing</span><span>Canva</span><span>Webflow</span><span>AI tools</span></div>
+        </div>
+        <ol class="timeline">
+          <li><b>Brand Marketing Specialist</b><time>2025 – now</time><span>B2B veterinary software company</span></li>
+          <li><b>Social Media Marketing Specialist</b><time>2024 – 2025</time><span>Podcast production company</span></li>
+          <li><b>Social Media Coordinator</b><time>2024 – 2025</time><span>Digital marketing agency</span></li>
+          <li><b>Content Writer, French (Québec)</b><time>2024</time><span>TransPerfect</span></li>
+          <li><b>Online Support &amp; Grocery Clerk</b><time>2023 – 2025</time><span>Goodness Me! Natural Food Market</span></li>
+          <li><b>Two Graduate Certificates</b><time>2023 – 2024</time><span>Conestoga College</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="contact" id="contact">
+      <span class="label" style="color:var(--ink)">Contact</span>
+      <h2>Let's talk about your brand.</h2>
+      <div class="row">
+        <span class="email" id="email">simonneau.lola@gmail.com</span>
+        <button class="btn primary" id="copy" type="button">Copy email</button>
+        <a class="btn" href="https://www.linkedin.com/in/lola-simonneau-96685b262/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <p class="note">To protect confidential information, company names, budgets and some figures are kept general or rounded, and all visuals are illustrations. Happy to walk through the details in conversation.</p>
+    </section>
+  </div>
+</main>
+
+<footer><div class="wrap">© 2026 Lola Simonneau · Toronto, Ontario</div></footer>
+<div class="tip" id="tip" hidden></div>
+
+<script>
+(function(){
+  /* scorecard: sample data */
+  var creators = [
+    {name:"Creator A", followers:120000, er:0.9, fit:2, conflict:false},
+    {name:"Creator B", followers:48000,  er:4.2, fit:5, conflict:false},
+    {name:"Creator C", followers:85000,  er:2.1, fit:4, conflict:true},
+    {name:"Creator D", followers:22000,  er:6.8, fit:4, conflict:false},
+    {name:"Creator E", followers:15000,  er:5.1, fit:5, conflict:false}
+  ];
+  creators.forEach(function(c){ c.score = c.conflict ? null : Math.round(Math.min(c.er,10)/10*50 + c.fit/5*50); });
+  var body = document.getElementById('sc-body'), verdict = document.getElementById('verdict');
+  var bF = document.getElementById('by-followers'), bS = document.getElementById('by-score');
+  function k(n){ return Math.round(n/1000) + 'K'; }
+  function render(mode){
+    var list = creators.slice().sort(function(a,b){
+      if (mode === 'followers') return b.followers - a.followers;
+      if (a.score === null) return 1; if (b.score === null) return -1; return b.score - a.score;
+    });
+    body.innerHTML = '';
+    list.forEach(function(c,i){
+      var tr = document.createElement('tr'); if (c.conflict && mode === 'score') tr.className = 'out';
+      var rank = (mode === 'score' && c.conflict) ? '–' : String(i+1);
+      var sc = c.score === null ? '<span class="pill no">Excluded</span>' : '<span class="bar" style="width:' + (c.score*0.9) + 'px"></span>' + c.score;
+      tr.innerHTML = '<td class="rank">' + rank + '</td><td>' + c.name + '</td><td class="num">' + k(c.followers) + '</td><td class="num">' +
+        c.er.toFixed(1) + '%</td><td class="num">' + c.fit + ' / 5</td><td>' + (c.conflict ? '<span class="pill no">Yes</span>' : '<span class="pill">No</span>') + '</td><td>' + sc + '</td>';
+      body.appendChild(tr);
+    });
+    bF.setAttribute('aria-pressed', mode === 'followers'); bS.setAttribute('aria-pressed', mode === 'score');
+    verdict.innerHTML = mode === 'followers'
+      ? '<strong>Ranked by reach,</strong> the biggest account wins, even though its audience barely engages and the content doesn’t fit.'
+      : '<strong>Ranked by the scorecard,</strong> smaller creators with engaged audiences come out on top, and the one working with a competitor is excluded.';
+  }
+  bF.addEventListener('click', function(){ render('followers'); });
+  bS.addEventListener('click', function(){ render('score'); });
+  render('score');
+
+  /* dumbbell: public follower counts */
+  var data = [{p:"Instagram",a:1150,b:3137},{p:"LinkedIn",a:1397,b:2087},{p:"Facebook",a:390,b:509},{p:"YouTube",a:149,b:328},{p:"TikTok",a:105,b:199}];
+  var MAX = 3500, wrap = document.getElementById('dumb'), tbl = document.getElementById('dumb-table'), tip = document.getElementById('tip');
+  function n(x){ return x.toLocaleString('en-CA'); }
+  function pct(x){ return (x / MAX * 100).toFixed(2) + '%'; }
+  data.forEach(function(d){
+    var ch = Math.round((d.b - d.a) / d.a * 100);
+    var row = document.createElement('div'); row.className = 'drow'; row.tabIndex = 0;
+    row.setAttribute('aria-label', d.p + ': ' + n(d.a) + ' followers in June 2025, ' + n(d.b) + ' in September 2026, up ' + ch + ' percent');
+    var grids = [0,1000,2000,3000].map(function(g){ return '<i class="grid" style="left:' + pct(g) + '"></i>'; }).join('');
+    row.innerHTML = '<div class="dline"><b>' + d.p + '</b><span>' + n(d.a) + ' → <em>' + n(d.b) + '</em> · +' + ch + '%</span></div>' +
+      '<div class="track" aria-hidden="true">' + grids +
+      '<i class="seg" style="left:' + pct(d.a) + ';width:calc(' + pct(d.b) + ' - ' + pct(d.a) + ')"></i>' +
+      '<i class="dot" style="left:' + pct(d.a) + ';background:var(--c-before)"></i>' +
+      '<i class="dot" style="left:' + pct(d.b) + ';background:var(--c-after)"></i></div>';
+    var text = d.p + '<br>June 2025: ' + n(d.a) + '<br>Sept 2026: ' + n(d.b) + '<br>Change: +' + ch + '%';
+    row.addEventListener('mousemove', function(e){ tip.innerHTML = text; tip.hidden = false;
+      tip.style.left = Math.min(e.clientX + 14, window.innerWidth - 230) + 'px'; tip.style.top = (e.clientY + 14) + 'px'; });
+    row.addEventListener('mouseleave', function(){ tip.hidden = true; });
+    wrap.appendChild(row);
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + d.p + '</td><td class="num">' + n(d.a) + '</td><td class="num">' + n(d.b) + '</td><td class="num">+' + ch + '%</td>';
+    tbl.appendChild(tr);
+  });
+
+  /* copy email */
+  document.getElementById('copy').addEventListener('click', function(){
+    var btn = this, el = document.getElementById('email'), text = el.textContent.trim();
+    function done(){ btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = 'Copy email'; }, 1800); }
+    function fallback(){ var r = document.createRange(); r.selectNodeContents(el); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Selected, press copy'; }
+    try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+  });
+})();
+</script>
+</body>
+</html>
